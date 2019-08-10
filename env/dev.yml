@@ -1,0 +1,4 @@
+tableName: emailInfo
+custom-domain-name: xxxxx
+account-number: xxxxxx
+ses-email-sender: xxxxxxx

@@ -1,0 +1,35 @@
+service: EmailInfo-Service # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: python3.6
+# you can overwrite defaults here
+  stage: ${opt:stage}
+  region: ${opt:region}
+  role: arn:aws:iam::${file(env/${opt:stage}.yml):account-number}:role/lambda_basic_execution
+  environment:
+    EMAIL_INFO_TABLE: ${file(env/${opt:stage}.yml):tableName}
+    SES_EMAIL_SENDER: ${file(env/${opt:stage}.yml):ses-email-sender}
+
+custom:
+  apiBasePath: v1
+  customDomain:
+    domainName: ${file(env/${opt:stage}.yml):custom-domain-name}
+    stage: ${self:provider.stage}
+    basePath: v1
+    createRoute53Record: true
+functions:
+  EmailInfoDetails:
+    handler:  emailInfo/handler.email_info
+    events:
+      - http:
+          path: /emailInfo
+          method: get
+          cors: true
+      - http:
+          path: /emailInfo
+          method: post
+          cors: true
+
+plugins:
+  - serverless-domain-manager
