@@ -1,4 +1,5 @@
-## SEND EMAIL NOTIFICATION SERVICEs
+## SEND EMAIL NOTIFICATION SERVICE
+### Prerequisites
 * python3.7
 * serverless framework
 
