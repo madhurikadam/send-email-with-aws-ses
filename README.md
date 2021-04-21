@@ -1,4 +1,4 @@
-## Send
+## Send Email Notification Using AWS SES
 ### Prerequisites
 * python3.7
 * serverless framework
